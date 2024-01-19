@@ -1,1 +1,146 @@
+<html lang="en">
+<head>
+  <meta ="UTF-8">
+  <title>Student Portal</title>
+  <style>
+    /* Your existing CSS styles */body {
+      font-family: Arial, sans-serif;
+      background-image: url("https://i.ibb.co/DKNhMgj/1704857778225.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #ffffff;
+    }
+
+djfk    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    #resultDisplay {
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    .studentResult {
+      border: 2px solid #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #000000;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ffffff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .totalMarks {
+      font-weight: bold;
+    }
+
+    label, input {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+    img{border-radius: 100%}
+
+    /* Additional styles for the result table */
+    table {
+      border-collapse: collapse;
+      width: 70%;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      background-color: white ;
+      color: black;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <!-- Your existing HTML content -->
+<img src="https://i.ibb.co/Dk1nL95/images.jpg" alt=""
+height="60px"
+width="60px">
+  <h1>SSA </h1>
+  <h2>X-B Boy's </h2>
+  <h3>By Maviya </h3>
+  <h1>For Student</h1>
+  <label for="rollNo">Enter Your Roll Number:</label>
+  <input type="text" id="rollNo" required>
+  <button type="button" onclick="checkResult()">Check Result</button>
+
+  <div id="resultDisplay"></div>
+
+  <script>
+    function checkResult() {
+      const rollNo = document.getElementById('rollNo').value;
+      const studentsData = JSON.parse(localStorage.getItem('studentsData')) || {};
+      const resultDisplay = document.getElementById('resultDisplay');
+      const result = studentsData[rollNo];
+
+      if (result) {
+        let resultTable = '<table>';
+        resultTable += `<tr><th>Subject</th><th>Marks Obtained</th></tr>`;
+        for (const subject in result) {
+          resultTable += `<tr><td>${subject}</td><td>${result[subject]}</td></tr>`;
+        }
+        resultTable += '</table>';
+
+        resultDisplay.innerHTML = resultTable;
+      } else {
+        resultDisplay.textContent = 'Roll number not found';
+      }
+    }
+
+    window.addEventListener('storage', checkResult); // Listens for changes in localStorage
+  </script>
+</body>
+</html>
 
